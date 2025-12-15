@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Filmes</title>
+    <style>
+        .register-wrapper{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            height: 100vh;
+            background-color: #f3f7ff;
+        }
+        .register-image{
+            width: 380px;
+        }
+        .container{
+            width: 400px;
+            background: #000000df;
+            padding: 25px;
+            border-radius: 12px;
+            color: #ffffff;
+            text-align: center;
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.5)
+        }
+        .container input{
+            width: 85%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 15px;
+        }
+        .container a{
+            color: #ffffff;
+            font-weight: bold;
+        }
+        .container button{
+            width: 85%;
+            padding: 12px;
+            background-color: #ffffff;
+            color: #000000;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .container button:hover{
+            background: #f8eadb;
+        }
+        .container .err{
+            width: 65%;
+            padding: 4px;
+            background: white;
+            color: red;
+            margin-left: 55px;
+            border-radius: 8px;
+            display: none;
+        }
+    
+    </style>
+</head>
+<body>
+    <div class="register-wrapper">
+       
+        <img src="/static/login-bg.png" alt="" class="register-image">
+
+        <div class="container">
+            <h2>Registrar</h2>
+            <input id="email" type="email" placeholder="Email">
+            <input id="password" type="password" placeholder="Senha">
+            <input id="confirmpassword" type="password" placeholder="Confirmar Senha">
+                <div class="err" id="err">
+            <p id="error" class="error"></p>
+                </div>
+            <button onclick="register()">Criar Conta</button>
+            <p>
+                Já tem conta?
+                <a href="/static/login.html">Entrar</a>
+            </p>
+        </div>
+
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="/static/firebase.js"></script>
+</body>
+
+<script>
+    function register(){
+        const email = document.getElementById("email").value
+        const senha = document.getElementById("password").value
+        const confirmpassword = document.getElementById("confirmpassword").value
+        const errorEl = document.getElementById("error")
+        const caixa = document.getElementById("err")
+
+        if(email.length <= 0){
+            errorEl.innerText = "Insira um e-mail!";
+            caixa.style.display = "block"
+            return
+        }
+
+        if (senha !== confirmpassword) {
+            errorEl.innerText = "As senhas não conferem";
+            caixa.style.display = "block"
+            return
+        }
+        if (senha.length<6) {
+            errorEl.innerText = "A senha deve ter pelo menos 6 caracteres";
+            caixa.style.display = "block"
+            return
+        }
+
+        firebase.auth().createUserWithEmailAndPassword(email, senha)
+        .then(()=>{
+            alert("Conta criada com sucesso!")
+            window.location.href = "/static/login.html"
+        })
+        .catch(err => {errorEl.innerText = err.message; caixa.style.display = "block"})
+        
+    }
+</script>
+
+</html>

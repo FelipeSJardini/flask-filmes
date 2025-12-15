@@ -1,0 +1,64 @@
+body {
+  background-color: #182854;
+  color: white;
+  font-family: 'Monospace';
+  text-align: center;
+  margin: 0;
+}
+
+header {
+  background-color: #0f1b40;
+  padding: 10px;
+}
+
+nav button, .buttons button {
+  margin: 5px;
+  padding: 10px;
+  background: white;
+  color: #182854;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+nav button:hover {
+  background: #d6e0ff;
+}
+
+.section {
+  display: none;
+  padding: 20px;
+}
+
+.section.active {
+  display: block;
+}
+
+.poster {
+  width: 250px;
+  height: 360px;
+  border-radius: 10px;
+  border: 3px solid white;
+}
+
+.list-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+.movie-card {
+  background: white;
+  color: #182854;
+  border-radius: 10px;
+  width: 200px;
+  padding: 10px;
+}
+
+.movie-card img {
+  width: 100%;
+  border-radius: 10px;
+}
+

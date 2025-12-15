@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Filmes</title>
+    <style>
+        .login-wrapper{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            height: 100vh;
+            background-color: #f3f7ff;
+        }
+        .login-image{
+            width: 380px;
+        }
+        .container{
+            width: 400px;
+            background: #000000df;
+            padding: 25px;
+            border-radius: 12px;
+            color: #ffffff;
+            text-align: center;
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.5)
+        }
+        .container input{
+            width: 85%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 15px;
+        }
+        .container a{
+            color: #ffffff;
+            font-weight: bold;
+        }
+        .container button{
+            width: 85%;
+            padding: 12px;
+            background-color: #ffffff;
+            color: #000000;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .container button:hover{
+            background: #f8eadb;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-wrapper">
+       
+        <img src="/static/login-bg.png" alt="" class="login-image">
+
+        <div class="container">
+            <h2>Entrar</h2>
+            <input id="email" type="email" placeholder="Email">
+            <input id="password" type="password" placeholder="Senha">
+
+            <button onclick="login()">Entrar</button>
+            <p>
+                Não tem conta?
+                <a href="/static/register.html">Cadastre-se!</a>
+            </p>
+        </div>
+
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="/static/firebase.js"></script>
+
+    <script>
+    function login() {
+            const email = document.getElementById("email").value;
+            const pass = document.getElementById("password").value;
+
+            firebase.auth().signInWithEmailAndPassword(email, pass)
+                .then(() => {
+                    localStorage.setItem("userLogged", "true");
+                    window.location.href = "/";
+                })
+                .catch(err => alert("Erro: " + err.message));
+        }
+</script>
+
+</body>
+</html>
